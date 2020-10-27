@@ -1,0 +1,5 @@
+# exclude files
+*__pycache__/
+*build/
+*.so
+*.pyc
