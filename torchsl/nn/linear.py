@@ -11,9 +11,14 @@ class Linear(nn.Module):
         super(Linear, self).__init__()
         self.in_dimension = in_dimension
         self.out_dimension = out_dimension
-        self.weight = nn.Parameter(torch.randn(in_dimension, out_dimension), requires_grad=requires_grad)
-        if bias:
-            self.bias = nn.Parameter(torch.zeros(out_dimension), requires_grad=requires_grad)
+        self._bias = bias
+        self._requires_grad = requires_grad
+        self.reset_parameters()
+
+    def reset_parameters(self):
+        self.weight = nn.Parameter(torch.randn(self.in_dimension, self.out_dimension), requires_grad=self._requires_grad)
+        if self._bias:
+            self.bias = nn.Parameter(torch.zeros(self.out_dimension), requires_grad=self._requires_grad)
         else:
             self.register_parameter('bias', None)
 
@@ -58,11 +63,16 @@ class Linears(nn.Module):
         self.in_dimensions = in_dimensions
         self.out_dimensions = out_dimensions
         self.num_views = len(in_dimensions)
-        self.weights = torch.nn.ParameterList(nn.Parameter(torch.randn(in_dim, out_dim), requires_grad=requires_grad)
-                                              for in_dim, out_dim in zip(in_dimensions, out_dimensions))
-        if bias:
-            self.biases = torch.nn.ParameterList(nn.Parameter(torch.zeros(out_dim), requires_grad=requires_grad)
-                                                 for out_dim in out_dimensions)
+        self._bias = bias
+        self._requires_grad = requires_grad
+        self.reset_parameters()
+
+    def reset_parameters(self):
+        self.weights = torch.nn.ParameterList(nn.Parameter(torch.randn(in_dim, out_dim), requires_grad=self._requires_grad)
+                                              for in_dim, out_dim in zip(self.in_dimensions, self.out_dimensions))
+        if self._bias:
+            self.biases = torch.nn.ParameterList(nn.Parameter(torch.zeros(out_dim), requires_grad=self._requires_grad)
+                                                 for out_dim in self.out_dimensions)
         else:
             self.register_parameter('biases', None)
 
@@ -88,6 +98,7 @@ class Linears(nn.Module):
         return list(self.weights)
 
     def requires_grad_(self, mode=False):
+        self._requires_grad = mode
         for param in self.parameters():
             param.requires_grad_(mode)
 

@@ -1,1 +1,1 @@
-from .eps import EPS
+from .geps import GEPSolver

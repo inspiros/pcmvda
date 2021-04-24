@@ -54,7 +54,6 @@ setup(
     version="1.0",
     author="inspiros",
     author_email='hnhat.tran@gmail.com',
-    url="mica.edu.vn",
     description="torch subspace learning",
     packages=find_packages(),
     install_requires=requirements,
