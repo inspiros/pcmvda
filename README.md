@@ -1,11 +1,14 @@
-# Pairwise-Covariance Multi-view Discriminant Analysis
+Pairwise-Covariance Multi-view Discriminant Analysis
+======
 
-This repo contains code of our paper proposing the algorithm.
+This repo contains the code of our paper
+[Pairwise-Covariance Multi-view Discriminant Analysis for Robust Cross-View Human Action Recognition](https://ieeexplore.ieee.org/document/9436781).
+
 ![pc-mvda](gallery/assets/pc-mvda.png)
 
-*More infos will be added later.*
+*This code is subjected to change in the future.*
 
-### Installation
+## Installation
 
 This project depends on `torchsl` package, which is under development and will be separated into independent repository
 soon. The package reimplements some subspace learning algorithms in PyTorch. To install C++ extension, use these
@@ -19,9 +22,9 @@ pip install .
 
 Nevertheless, the package works without C++ extension, but in python speed.
 
-### Usage
+## Usage
 
-The `torchsl` package tries to offer another perspective of subspace learning algorithm. Generally, there are two main
+The `torchsl` package tries to offer another perspective of subspace learning algorithms. Generally, there are two main
 components of an algorithm:
 
 - *The linear projector* can be viewed as a single Linear layer without bias, packaged in `torchsl.nn.Linear` (
@@ -82,7 +85,7 @@ projector.requires_grad_(False)
 Ys = projector(Xs)
 ```
 
-### Example
+## Examples
 
 Run `main_synthetic.py` to reproduce the ablation study on synthetic datasets presented in our paper. The code for the
 beautiful scatter plots is also included.
@@ -93,6 +96,22 @@ beautiful scatter plots is also included.
   ![synthetic2](gallery/assets/synthetic2.png)
   You can change the generation parameters to see more results.
 
-### Note
+## Citation
 
-*This code is subject to change in the future*
+```bibtex
+@article{tran2021pairwise,
+    author={Tran, Hoang-Nhat and Nguyen, Hong-Quan and Doan, Huong-Giang and Tran, Thanh-Hai and Le, Thi-Lan and Vu, Hai},
+    journal={IEEE Access}, 
+    title={Pairwise-Covariance Multi-view Discriminant Analysis for Robust Cross-View Human Action Recognition}, 
+    year={2021},
+    volume={9},
+    number={},
+    pages={76097-76111},
+    doi={10.1109/ACCESS.2021.3082142}
+}
+```
+
+## License
+
+The code is released under the MIT license. See [`LICENSE.txt`](LICENSE.txt) for details.
+
